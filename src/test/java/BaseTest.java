@@ -11,7 +11,7 @@ public class BaseTest {
     {
         Configuration.baseUrl="https://qa-guru.github.io";
         Configuration.browserSize="1920x1080";
-        Configuration.holdBrowserOpen=true;
+        Configuration.holdBrowserOpen=false;
     }
 
     @AfterEach

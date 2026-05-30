@@ -8,7 +8,6 @@ public class PracticeFormTest extends BaseTest{
     @Test
     void submitFullFillFormTest ()
     {
-
         open("/one-page-form/automation-practice-form.html");
         $("#promoCta").shouldBe(visible);
         $("[aria-label='Close'][type='button']").click();
@@ -31,7 +30,7 @@ public class PracticeFormTest extends BaseTest{
         $x("//div[@class='state-city-option'] [text()=\"Uttar Pradesh\"]").scrollTo().click();
         $("#city").click();
         $x("//div[@class='state-city-option'] [text()=\"Lucknow\"]").click();
-        $("#submit").click();
+        $("#submit").scrollTo().click();
 
         $("#resultModal").shouldBe(visible);
         $x("//tr[td[text()=\"Student Name\"]]/td[2]").shouldHave(text("Test Testov"));
@@ -48,7 +47,83 @@ public class PracticeFormTest extends BaseTest{
         $("#closeModal").click();
 
         $("#resultModal").shouldBe(disappear);
+    }
 
+    @Test
+    void submitFormWithRequiredFieldsTest()
+    {
+        open("/one-page-form/automation-practice-form.html");
+        $("#promoCta").shouldBe(visible);
+        $("[aria-label='Close'][type='button']").click();
+        $("#firstName").setValue("Test");
+        $("#lastName").setValue("Testov");
+        $("[type='radio'][value='Male']").click();
+        $("#userNumber").setValue("7923858192");
+        $("#submit").scrollTo().click();
 
+        $("#resultModal").shouldBe(visible);
+        $x("//tr[td[text()=\"Student Name\"]]/td[2]").shouldHave(text("Test Testov"));
+        $x("//tr[td[text()=\"Gender\"]]/td[2]").shouldHave(text("Male"));
+        $x("//tr[td[text()=\"Mobile\"]]/td[2]").shouldHave(text("7923858192"));
+
+        $("#closeModal").click();
+
+        $("#resultModal").shouldBe(disappear);
+    }
+    @Test
+    void submitFormWithotRequiredFirstName()
+    {
+        open("/one-page-form/automation-practice-form.html");
+        $("#promoCta").shouldBe(visible);
+        $("[aria-label='Close'][type='button']").click();
+        $("#lastName").setValue("Testov");
+        $("[type='radio'][value='Male']").click();
+        $("#userNumber").setValue("7923858192");
+        $("#submit").scrollTo().click();
+
+        $("#formError").shouldBe(visible);
+        $("#formError").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+    }
+    @Test
+    void submitFormWithotRequiredLastName()
+    {
+        open("/one-page-form/automation-practice-form.html");
+        $("#promoCta").shouldBe(visible);
+        $("[aria-label='Close'][type='button']").click();
+        $("#firstName").setValue("Test");
+        $("[type='radio'][value='Male']").click();
+        $("#userNumber").setValue("7923858192");
+        $("#submit").scrollTo().click();
+
+        $("#formError").shouldBe(visible);
+        $("#formError").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+    }
+    @Test
+    void submitFormWithotRequiredUserPhone()
+    {
+        open("/one-page-form/automation-practice-form.html");
+        $("#promoCta").shouldBe(visible);
+        $("[aria-label='Close'][type='button']").click();
+        $("#firstName").setValue("Test");
+        $("#lastName").setValue("Testov");
+        $("[type='radio'][value='Male']").click();
+        $("#submit").scrollTo().click();
+
+        $("#formError").shouldBe(visible);
+        $("#formError").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
+    }
+    @Test
+    void submitFormWithUncorrectedUserPhone()
+    {
+        open("/one-page-form/automation-practice-form.html");
+        $("#promoCta").shouldBe(visible);
+        $("[aria-label='Close'][type='button']").click();
+        $("#lastName").setValue("Testov");
+        $("[type='radio'][value='Male']").click();
+        $("#userNumber").setValue("7923");
+        $("#submit").scrollTo().click();
+
+        $("#formError").shouldBe(visible);
+        $("#formError").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
     }
 }

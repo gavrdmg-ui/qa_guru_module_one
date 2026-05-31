@@ -1,35 +1,34 @@
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class PracticeFormTest extends BaseTest{
+public class PracticeFormTest extends BaseTest {
 
     @Test
-    void submitFullFillFormTest ()
-    {
+    void submitFullFillFormTest() {
         open("/one-page-form/automation-practice-form.html");
         $("#promoCta").shouldBe(visible);
         $("[aria-label='Close'][type='button']").click();
         $("#firstName").setValue("Test");
         $("#lastName").setValue("Testov");
         $("#userEmail").setValue("testing@mail.com");
-        $("[type='radio'][value='Male']").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("7923858192");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("August");
         $(".react-datepicker__year-select").selectOption("1999");
         $(".react-datepicker__day--027").click();
         $("#subjectsInput").setValue("Computer Science").pressEnter();
-        $("#hobbies-checkbox-1").click();
-        $("#hobbies-checkbox-3").click();
+        $("#hobbiesWrapper").$(byText("Sports")).click();
+        $("#hobbiesWrapper").$(byText("Music")).click();
         $("#uploadPicture").uploadFromClasspath("Cat.jpg");
         $("#currentAddress").setValue("Улица Пушкина, дом Колотушкина, квартира Вампиров, №3");
         $("#state").click();
-        $("#stateCity-wrapper").shouldBe(visible);
-        $x("//div[@class='state-city-option'] [text()=\"Uttar Pradesh\"]").scrollTo().click();
+        $("#stateCity-wrapper").$(byText("Uttar Pradesh")).scrollTo().click();
         $("#city").click();
-        $x("//div[@class='state-city-option'] [text()=\"Lucknow\"]").click();
+        $("#stateCity-wrapper").$(byText("Lucknow")).click();
         $("#submit").scrollTo().click();
 
         $("#resultModal").shouldBe(visible);
@@ -50,8 +49,7 @@ public class PracticeFormTest extends BaseTest{
     }
 
     @Test
-    void submitFormWithRequiredFieldsTest()
-    {
+    void submitFormWithRequiredFieldsTest() {
         open("/one-page-form/automation-practice-form.html");
         $("#promoCta").shouldBe(visible);
         $("[aria-label='Close'][type='button']").click();
@@ -70,9 +68,9 @@ public class PracticeFormTest extends BaseTest{
 
         $("#resultModal").shouldBe(disappear);
     }
+
     @Test
-    void submitFormWithotRequiredFirstName()
-    {
+    void submitFormWithotRequiredFirstName() {
         open("/one-page-form/automation-practice-form.html");
         $("#promoCta").shouldBe(visible);
         $("[aria-label='Close'][type='button']").click();
@@ -84,9 +82,9 @@ public class PracticeFormTest extends BaseTest{
         $("#formError").shouldBe(visible);
         $("#formError").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
     }
+
     @Test
-    void submitFormWithotRequiredLastName()
-    {
+    void submitFormWithotRequiredLastName() {
         open("/one-page-form/automation-practice-form.html");
         $("#promoCta").shouldBe(visible);
         $("[aria-label='Close'][type='button']").click();
@@ -98,9 +96,9 @@ public class PracticeFormTest extends BaseTest{
         $("#formError").shouldBe(visible);
         $("#formError").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
     }
+
     @Test
-    void submitFormWithotRequiredUserPhone()
-    {
+    void submitFormWithotRequiredUserPhone() {
         open("/one-page-form/automation-practice-form.html");
         $("#promoCta").shouldBe(visible);
         $("[aria-label='Close'][type='button']").click();
@@ -112,9 +110,9 @@ public class PracticeFormTest extends BaseTest{
         $("#formError").shouldBe(visible);
         $("#formError").shouldHave(text("Please fill required fields and enter a valid 10-digit mobile number."));
     }
+
     @Test
-    void submitFormWithUncorrectedUserPhone()
-    {
+    void submitFormWithUncorrectedUserPhone() {
         open("/one-page-form/automation-practice-form.html");
         $("#promoCta").shouldBe(visible);
         $("[aria-label='Close'][type='button']").click();

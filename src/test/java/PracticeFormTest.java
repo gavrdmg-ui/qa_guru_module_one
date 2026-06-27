@@ -20,7 +20,7 @@ public class PracticeFormTest extends BaseTest {
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption(birthMonth);
         $(".react-datepicker__year-select").selectOption(birthYear);
-        $(".react-datepicker__day--027").click();
+        $(".react-datepicker__week").$(byText(birthDay)).click();
         $("#subjectsInput").setValue(subject).pressEnter();
         $("#hobbiesWrapper").$(byText(hobbies.get(0))).click();
         $("#hobbiesWrapper").$(byText(hobbies.get(1))).click();
@@ -33,16 +33,16 @@ public class PracticeFormTest extends BaseTest {
         $("#submit").scrollTo().click();
 
         $("#resultModal").shouldBe(visible);
-        $x("//tr[td[text()=\"Student Name\"]]/td[2]").shouldHave(text(firstName + " " + lastName));
-        $x("//tr[td[text()=\"Student Email\"]]/td[2]").shouldHave(text(userEmail));
-        $x("//tr[td[text()=\"Gender\"]]/td[2]").shouldHave(text(gender));
-        $x("//tr[td[text()=\"Mobile\"]]/td[2]").shouldHave(text(mobilePhoneNumber));
-        $x("//tr[td[text()=\"Date of Birth\"]]/td[2]").shouldHave(text(birthDay + " " + months.get(birthMonth) + " " + birthYear));
-        $x("//tr[td[text()=\"Subjects\"]]/td[2]").shouldHave(text(subject));
-        $x("//tr[td[text()=\"Hobbies\"]]/td[2]").shouldHave(text(hobbies.get(0) +", "+hobbies.get(1)));
-        $x("//tr[td[text()=\"Picture\"]]/td[2]").shouldHave(text(uploadPicture));
-        $x("//tr[td[text()=\"Address\"]]/td[2]").shouldHave(text(currentAddress));
-        $x("//tr[td[text()=\"State and City\"]]/td[2]").shouldHave(text(state + " " + city));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(gender));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(mobilePhoneNumber));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(birthDay + " " + months.get(birthMonth) + " " + birthYear));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subject));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbies.get(0) +", "+hobbies.get(1)));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text(uploadPicture));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(state + " " + city));
 
         $("#closeModal").click();
 
@@ -61,9 +61,9 @@ public class PracticeFormTest extends BaseTest {
         $("#submit").scrollTo().click();
 
         $("#resultModal").shouldBe(visible);
-        $x("//tr[td[text()=\"Student Name\"]]/td[2]").shouldHave(text(firstName + " " + lastName));
-        $x("//tr[td[text()=\"Gender\"]]/td[2]").shouldHave(text(gender));
-        $x("//tr[td[text()=\"Mobile\"]]/td[2]").shouldHave(text(mobilePhoneNumber));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(gender));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(mobilePhoneNumber));
 
         $("#closeModal").click();
 

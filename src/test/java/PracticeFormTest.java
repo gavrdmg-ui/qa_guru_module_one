@@ -39,7 +39,7 @@ public class PracticeFormTest extends BaseTest {
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(mobilePhoneNumber));
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(birthDay + " " + months.get(birthMonth) + " " + birthYear));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subject));
-        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbies.get(0) +", "+hobbies.get(1)));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbies.get(0) + ", " + hobbies.get(1)));
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text(uploadPicture));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
         $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(state + " " + city));

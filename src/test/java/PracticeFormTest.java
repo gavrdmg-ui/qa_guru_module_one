@@ -39,6 +39,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void submitFormWithRequiredFieldsTest() {
         registrationPage.openPage()
+                .removeBanners()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .setGender(gender)
@@ -55,6 +56,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void submitFormWithoutRequiredFirstName() {
         registrationPage.openPage()
+                .removeBanners()
                 .typeLastName(lastName)
                 .setGender(gender)
                 .typeUserPhoneNumber(mobilePhoneNumber)
@@ -65,6 +67,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void submitFormWithoutRequiredLastName() {
         registrationPage.openPage()
+                .removeBanners()
                 .typeFirstName(firstName)
                 .setGender(gender)
                 .typeUserPhoneNumber(mobilePhoneNumber)
@@ -75,6 +78,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void submitFormWithoutRequiredUserPhone() {
         registrationPage.openPage()
+                .removeBanners()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .setGender(gender)
@@ -85,6 +89,7 @@ public class PracticeFormTest extends BaseTest {
     @Test
     void submitFormWithUncorrectedUserPhone() {
         registrationPage.openPage()
+                .removeBanners()
                 .typeLastName(lastName)
                 .setGender(gender)
                 .typeUserPhoneNumber(uncorrectMobilePhoneNumber)

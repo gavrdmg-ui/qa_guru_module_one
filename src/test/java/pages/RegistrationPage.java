@@ -13,29 +13,33 @@ public class RegistrationPage {
     CalendarComponent calendar = new CalendarComponent();
     ResultModalComponent pageResults = new ResultModalComponent();
 
-    private SelenideElement firstNameInput = $("#firstName");
-    private SelenideElement lastNameInput = $("#lastName");
-    private SelenideElement userEmailInput = $("#userEmail");
-    private SelenideElement genderContainer = $("#genterWrapper");
-    private SelenideElement userNumberInput = $("#userNumber");
-    private SelenideElement subjectsContainer = $("#subjectsInput");
-    private SelenideElement hobbiesContainer = $("#hobbiesWrapper");
-    private SelenideElement uploadPicture = $("#uploadPicture");
-    private SelenideElement currentAddress = $("#currentAddress");
-    private SelenideElement stateSelect = $("#state");
-    private SelenideElement citySelect = $("#city");
-    private SelenideElement stateCityContainer = $("#stateCity-wrapper");
-    private SelenideElement submitButton = $("#submit");
-    private SelenideElement title = $(".practice-form-wrapper");
-    private SelenideElement formErrorMessage = $("#formError");
+    private final SelenideElement firstNameInput = $("#firstName");
+    private final SelenideElement lastNameInput = $("#lastName");
+    private final SelenideElement userEmailInput = $("#userEmail");
+    private final SelenideElement genderContainer = $("#genterWrapper");
+    private final SelenideElement userNumberInput = $("#userNumber");
+    private final SelenideElement subjectsContainer = $("#subjectsInput");
+    private final SelenideElement hobbiesContainer = $("#hobbiesWrapper");
+    private final SelenideElement uploadPicture = $("#uploadPicture");
+    private final SelenideElement currentAddress = $("#currentAddress");
+    private final SelenideElement stateSelect = $("#state");
+    private final SelenideElement citySelect = $("#city");
+    private final SelenideElement stateCityContainer = $("#stateCity-wrapper");
+    private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement title = $(".practice-form-wrapper");
+    private final SelenideElement formErrorMessage = $("#formError");
 
 
     public RegistrationPage openPage() {
         open("/one-page-form/automation-practice-form.html");
         title.shouldHave(text("Student Registration Form"));
+
+        return this;
+    }
+
+    public RegistrationPage removeBanners() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
-
         return this;
     }
 

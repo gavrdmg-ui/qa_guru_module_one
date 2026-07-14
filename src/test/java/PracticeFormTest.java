@@ -1,37 +1,45 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import testdata.PracticeFormTestData;
 
 import static com.codeborne.selenide.Condition.*;
-import static testdata.PracticeFormTestData.*;
 
 public class PracticeFormTest extends BaseTest {
+
+    public PracticeFormTestData testData;
+
+    @BeforeEach
+    void PrepareTestData() {
+        testData = new PracticeFormTestData();
+    }
 
     @Test
     void submitFullFillFormTest() {
         registrationPage.openPage()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typeUserEmail(userEmail)
-                .setGender(gender)
-                .typeUserPhoneNumber(mobilePhoneNumber)
-                .setDateOfBirth(birthDay, birthMonth, birthYear)
-                .setSubject(subject)
-                .setHobbies(hobbies.get(0))
-                .setHobbies(hobbies.get(1))
-                .uploadPicture(uploadPicture)
-                .typeCurrentAddress(currentAddress)
-                .setStateAndCity(state, city)
+                .removeBanners()
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .typeUserEmail(testData.userEmail)
+                .setGender(testData.gender)
+                .typeUserPhoneNumber(testData.mobilePhoneNumber)
+                .setDateOfBirth(testData.birthDay, testData.birthMonth[0], testData.birthYear)
+                .setSubject(testData.subject)
+                .setHobbies(testData.hobbies)
+                .uploadPicture(testData.uploadPicture)
+                .typeCurrentAddress(testData.currentAddress)
+                .setStateAndCity(testData.state, testData.city)
                 .submitForm()
                 .checkResultCondition(visible)
-                .checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Student Email", userEmail)
-                .checkResult("Gender", gender)
-                .checkResult("Mobile", mobilePhoneNumber)
-                .checkResult("Date of Birth", birthDay + " " + months.get(birthMonth) + " " + birthYear)
-                .checkResult("Subjects", subject)
-                .checkResult("Hobbies", hobbies.get(0) + ", " + hobbies.get(1))
-                .checkResult("Picture", uploadPicture)
-                .checkResult("Address", currentAddress)
-                .checkResult("State and City", state + " " + city)
+                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
+                .checkResult("Student Email", testData.userEmail)
+                .checkResult("Gender", testData.gender)
+                .checkResult("Mobile", testData.mobilePhoneNumber)
+                .checkResult("Date of Birth", testData.birthDay + " " + testData.birthMonth[1] + " " + testData.birthYear)
+                .checkResult("Subjects", testData.subject)
+                .checkResult("Hobbies", testData.hobbies)
+                .checkResult("Picture", testData.uploadPicture)
+                .checkResult("Address", testData.currentAddress)
+                .checkResult("State and City", testData.state + " " + testData.city)
                 .closeResult()
                 .checkResultCondition(disappear);
     }
@@ -40,15 +48,15 @@ public class PracticeFormTest extends BaseTest {
     void submitFormWithRequiredFieldsTest() {
         registrationPage.openPage()
                 .removeBanners()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .setGender(gender)
-                .typeUserPhoneNumber(mobilePhoneNumber)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .setGender(testData.gender)
+                .typeUserPhoneNumber(testData.mobilePhoneNumber)
                 .submitForm()
                 .checkResultCondition(visible)
-                .checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Gender", gender)
-                .checkResult("Mobile", mobilePhoneNumber)
+                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
+                .checkResult("Gender", testData.gender)
+                .checkResult("Mobile", testData.mobilePhoneNumber)
                 .closeResult()
                 .checkResultCondition(disappear);
     }
@@ -57,43 +65,43 @@ public class PracticeFormTest extends BaseTest {
     void submitFormWithoutRequiredFirstName() {
         registrationPage.openPage()
                 .removeBanners()
-                .typeLastName(lastName)
-                .setGender(gender)
-                .typeUserPhoneNumber(mobilePhoneNumber)
+                .typeLastName(testData.lastName)
+                .setGender(testData.gender)
+                .typeUserPhoneNumber(testData.mobilePhoneNumber)
                 .submitForm()
-                .checkFormError(formError);
+                .checkFormError(testData.formError);
     }
 
     @Test
     void submitFormWithoutRequiredLastName() {
         registrationPage.openPage()
                 .removeBanners()
-                .typeFirstName(firstName)
-                .setGender(gender)
-                .typeUserPhoneNumber(mobilePhoneNumber)
+                .typeFirstName(testData.firstName)
+                .setGender(testData.gender)
+                .typeUserPhoneNumber(testData.mobilePhoneNumber)
                 .submitForm()
-                .checkFormError(formError);
+                .checkFormError(testData.formError);
     }
 
     @Test
     void submitFormWithoutRequiredUserPhone() {
         registrationPage.openPage()
                 .removeBanners()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .setGender(gender)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .setGender(testData.gender)
                 .submitForm()
-                .checkFormError(formError);
+                .checkFormError(testData.formError);
     }
 
     @Test
     void submitFormWithUncorrectedUserPhone() {
         registrationPage.openPage()
                 .removeBanners()
-                .typeLastName(lastName)
-                .setGender(gender)
-                .typeUserPhoneNumber(uncorrectMobilePhoneNumber)
+                .typeLastName(testData.lastName)
+                .setGender(testData.gender)
+                .typeUserPhoneNumber(testData.uncorrectMobilePhoneNumber)
                 .submitForm()
-                .checkFormError(formError);
+                .checkFormError(testData.formError);
     }
 }

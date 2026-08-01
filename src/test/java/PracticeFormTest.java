@@ -10,9 +10,6 @@ import static io.qameta.allure.Allure.step;
 public class PracticeFormTest extends BaseTest {
 
 
-
-
-
     @Test
     @DisplayName("Successful registration")
     void submitFullFillFormTest() {
@@ -52,63 +49,100 @@ public class PracticeFormTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Successful registration with required fields")
     void submitFormWithRequiredFieldsTest() {
-        registrationPage.openPage()
-                .removeBanners()
-                .typeFirstName(testData.firstName)
-                .typeLastName(testData.lastName)
-                .setGender(testData.gender)
-                .typeUserPhoneNumber(testData.mobilePhoneNumber)
-                .submitForm()
-                .checkResultCondition(visible)
-                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
-                .checkResult("Gender", testData.gender)
-                .checkResult("Mobile", testData.mobilePhoneNumber)
-                .closeResult()
-                .checkResultCondition(disappear);
+        step("Open registration page", () -> {
+            registrationPage.openPage();
+        });
+        step("Fill registration form", () -> {
+            registrationPage.removeBanners()
+                    .typeFirstName(testData.firstName)
+                    .typeLastName(testData.lastName)
+                    .setGender(testData.gender)
+                    .typeUserPhoneNumber(testData.mobilePhoneNumber)
+                    .submitForm();
+
+        });
+        step("Check registration form results", () -> {
+            registrationPage.checkResultCondition(visible)
+                    .checkResult("Student Name", testData.firstName + " " + testData.lastName)
+                    .checkResult("Gender", testData.gender)
+                    .checkResult("Mobile", testData.mobilePhoneNumber)
+                    .closeResult()
+                    .checkResultCondition(disappear);
+        });
     }
 
     @Test
+    @DisplayName("Failed registration without required first name")
     void submitFormWithoutRequiredFirstName() {
-        registrationPage.openPage()
-                .removeBanners()
-                .typeLastName(testData.lastName)
-                .setGender(testData.gender)
-                .typeUserPhoneNumber(testData.mobilePhoneNumber)
-                .submitForm()
-                .checkFormError(testData.formError);
+        step("Open registration page", () -> {
+            registrationPage.openPage();
+        });
+        step("Fill registration form", () -> {
+            registrationPage.removeBanners()
+                    .typeLastName(testData.lastName)
+                    .setGender(testData.gender)
+                    .typeUserPhoneNumber(testData.mobilePhoneNumber)
+                    .submitForm();
+
+        });
+        step("Check form error text", () -> {
+            registrationPage.checkFormError(testData.formError);
+        });
     }
 
     @Test
+    @DisplayName("Failed registration without required last name")
     void submitFormWithoutRequiredLastName() {
-        registrationPage.openPage()
-                .removeBanners()
-                .typeFirstName(testData.firstName)
-                .setGender(testData.gender)
-                .typeUserPhoneNumber(testData.mobilePhoneNumber)
-                .submitForm()
-                .checkFormError(testData.formError);
+        step("Open registration page", () -> {
+            registrationPage.openPage();
+        });
+        step("Fill registration form", () -> {
+            registrationPage.removeBanners()
+                    .typeFirstName(testData.firstName)
+                    .setGender(testData.gender)
+                    .typeUserPhoneNumber(testData.mobilePhoneNumber)
+                    .submitForm();
+        });
+        step("Check form error text", () -> {
+            registrationPage.checkFormError(testData.formError);
+        });
     }
 
     @Test
+    @DisplayName("Failed registration without required user phone")
     void submitFormWithoutRequiredUserPhone() {
-        registrationPage.openPage()
-                .removeBanners()
-                .typeFirstName(testData.firstName)
-                .typeLastName(testData.lastName)
-                .setGender(testData.gender)
-                .submitForm()
-                .checkFormError(testData.formError);
+        step("Open registration page", () -> {
+            registrationPage.openPage();
+        });
+        step("Fill registration form", () -> {
+            registrationPage.removeBanners()
+                    .typeFirstName(testData.firstName)
+                    .typeLastName(testData.lastName)
+                    .setGender(testData.gender)
+                    .submitForm();
+        });
+        step("Check form error text", () -> {
+            registrationPage.checkFormError(testData.formError);
+        });
     }
 
     @Test
+    @DisplayName("Failed registration without uncorrected user phone")
     void submitFormWithUncorrectedUserPhone() {
-        registrationPage.openPage()
-                .removeBanners()
-                .typeLastName(testData.lastName)
-                .setGender(testData.gender)
-                .typeUserPhoneNumber(testData.uncorrectMobilePhoneNumber)
-                .submitForm()
-                .checkFormError(testData.formError);
+        step("Open registration page", () -> {
+            registrationPage.openPage();
+        });
+        step("Fill registration form", () -> {
+            registrationPage.removeBanners()
+                    .typeLastName(testData.lastName)
+                    .setGender(testData.gender)
+                    .typeUserPhoneNumber(testData.uncorrectMobilePhoneNumber)
+                    .submitForm();
+        });
+        step("Check form error text", () -> {
+            registrationPage.checkFormError(testData.formError);
+        });
     }
 }

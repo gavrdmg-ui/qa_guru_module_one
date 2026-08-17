@@ -42,5 +42,6 @@ tasks.withType(JavaCompile) {
 }
 
 test {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 }

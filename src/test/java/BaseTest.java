@@ -21,9 +21,12 @@ public class BaseTest {
 
     @BeforeAll
     static void setUp() {
-        Configuration.baseUrl = "https://qa-guru.github.io";
-        Configuration.browserSize = "1920x1080";
+        Configuration.browser=System.getProperty("browser","chrome");
+        Configuration.browserVersion=System.getProperty("browserVersion","149.0");
+        Configuration.browserSize = System.getProperty("browserSize","1920x1080");
+        Configuration.headless= Boolean.parseBoolean(System.getProperty("headless","true"));
         Configuration.holdBrowserOpen = false;
+        Configuration.baseUrl = System.getProperty("baseUrl","https://qa-guru.github.io");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));
@@ -33,7 +36,7 @@ public class BaseTest {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
+        Configuration.remote = "https://user1:1234@"+System.getProperty("remoteURL","selenoid.qa.guru/wd/hub");
     }
 
     @AfterEach

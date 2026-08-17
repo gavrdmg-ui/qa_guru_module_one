@@ -36,7 +36,7 @@ public class BaseTest {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@"+System.getProperty("remoteURL","selenoid.qa.guru/wd/hub");
+        Configuration.remote = System.getProperty("remoteURL");
     }
 
     @AfterEach

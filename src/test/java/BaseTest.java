@@ -24,9 +24,9 @@ public class BaseTest {
         Configuration.browser=System.getProperty("browser","chrome");
         Configuration.browserVersion=System.getProperty("browserVersion","149.0");
         Configuration.browserSize = System.getProperty("browserSize","1920x1080");
-        Configuration.headless= Boolean.parseBoolean(System.getProperty("headless","true"));
+        Configuration.headless= Boolean.parseBoolean(System.getProperty("headless","false"));
         Configuration.holdBrowserOpen = false;
-        Configuration.baseUrl = System.getProperty("baseUrl","https://qa-guru.github.io");
+        Configuration.baseUrl = System.getProperty("baseUrl","https://demo.qa.guru/");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));
